@@ -6,15 +6,13 @@ getIP() {
         #Simple line to manually avoid DNS requesting
 	 if [ $1 = "vm1" ]
         then
-                echo "10.0.0.101"
+                echo "10.0.0.103"
         elif [ $1 = "vm2" ]
         then
-                echo "vm2 IP"
-                return 10.0.0.102
+                echo "10.0.0.104"
         elif [ $1 = "vm3" ]
         then
-                echo "vm3 IP"
-                return 10.0.0.103
+                echo "10.0.0.105"
         fi
 }
 
@@ -127,8 +125,13 @@ cat << EOF >> crypto-config.yml
       Count: 1
 EOF
 
+export FABRIC_CFG_PATH=$PWD
+echo "GENERATION DE LA CONFIGURATION"
 ./cryptogen generate --config crypto-config.yml
+echo "GENERATION DE GENESIS BLOCK"
 ./configtxgen -profile Genesis -outputBlock genesis.block  -channelID system
+echo "GENERATION DU CHANNEL.TX"
+#TODO change channel name
 ./configtxgen -profile Channels -outputCreateChannelTx yacov.tx -channelID yacov
 
 
