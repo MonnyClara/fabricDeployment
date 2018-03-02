@@ -1,3 +1,3 @@
-orderer="vm1"
-peers="vm2 vm3"
+orderer="ubhl05"
+peers="ubhl03 ubhl04"
 
