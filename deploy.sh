@@ -1,9 +1,21 @@
 #!/bin/bash -e
-
+#CODE CREATED BY https://github.com/yacovm/
 
 
 getIP() {
-        ssh $1 "ip addr | grep 'inet .*global' | cut -f 6 -d ' ' | cut -f1 -d '/' | head -n 1"
+        #Simple line to manually avoid DNS requesting
+	 if [ $1 = "vm1" ]
+        then
+                echo "10.0.0.101"
+        elif [ $1 = "vm2" ]
+        then
+                echo "vm2 IP"
+                return 10.0.0.102
+        elif [ $1 = "vm3" ]
+        then
+                echo "vm3 IP"
+                return 10.0.0.103
+        fi
 }
 
 probePeerOrOrderer() {
